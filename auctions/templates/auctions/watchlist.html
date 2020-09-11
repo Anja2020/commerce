@@ -1,0 +1,18 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+
+    <ul>
+        {% for item in users_watchlist %}
+            <li>
+                <a href="{% url 'details' item.listing.id %}">
+                    <h5>{{ item.listing.title }}</h5>
+                </a>
+                <div>Current Price: {{ item.listing.current_price }}</div>
+            </li>
+        {% empty %}
+            <li>There are no Auction Listings on your Watchlist</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
