@@ -6,6 +6,8 @@ from django.urls import reverse
 from django import forms
 from .models import User, AuctionListing, Watchlist, Bid, Comment
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 class NewListingForm(forms.Form):
@@ -123,7 +125,7 @@ def getInitialDetailsParam(user, listing):
 
     return (comment_form, comments, bid_form, num_bids[0], in_watchlist, message)
 
-
+@csrf_exempt
 @login_required
 def bid(request, listing_id):
 
@@ -160,7 +162,7 @@ def bid(request, listing_id):
                 })
     return redirect("details", listing_id)
 
-
+@csrf_exempt
 @login_required
 def comment(request, listing_id):
     listing = AuctionListing.objects.get(id=listing_id)
@@ -191,7 +193,7 @@ def comment(request, listing_id):
             })
     return redirect("details", listing_id)
 
-
+@csrf_exempt
 @login_required
 def create(request):
     if request.method == "POST":
@@ -224,6 +226,7 @@ def create(request):
     })
 
 
+@csrf_exempt
 @login_required
 def watchlist(request):
     user_id = request.user.id
@@ -232,7 +235,7 @@ def watchlist(request):
         "users_watchlist": users_watchlist
     })
 
-
+@csrf_exempt
 @login_required
 def addToWatchlist(request, listing_id):
     user = request.user
@@ -241,7 +244,7 @@ def addToWatchlist(request, listing_id):
     watchlist_item.save()
     return redirect("details", listing.id)
 
-
+@csrf_exempt
 @login_required
 def removeFromWatchlist(request, listing_id):
     user = request.user
@@ -252,7 +255,7 @@ def removeFromWatchlist(request, listing_id):
 
 def categories(request):
     categories = {
-        listing.category for listing in AuctionListing.objects.exclude(category="")}
+        listing.category for listing in AuctionListing.objects.exclude(category="").filter(active=True)}
     return render(request, "auctions/categories.html", {
         "categories": categories
     })

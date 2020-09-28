@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+    <h1>Active Listings</h1>
 
     <div class="row row-cols-1 row-cols-md-4">
 
@@ -27,6 +27,13 @@
                 </div>
             </div>
         </div>
+
+        {% empty %}
+        <ul>
+            <li>
+                There are currently no Listings available.
+            </li>        
+        </ul>
 
         {% endfor %}
     </div>

@@ -53,6 +53,10 @@
                     
                                 <div class="alert alert-success" role="alert">Congratulations! You are the winner of this auction!</div>
                     
+                            {% elif listing.active %}
+
+                                <div class="alert alert-info" role="alert">Login to bid.</div>
+
                             {% else %}
                     
                                 <div class="alert alert-danger" role="alert">This Auction Listing is already closed</div>

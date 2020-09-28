@@ -7,6 +7,10 @@
 {% for category in categories %}
     <a href="{% url 'categoryListings' category %}" class="btn btn-secondary">{{ category }}</a>
 {% empty %}
-    <div>No categories available</div>
+    <ul>
+        <li>
+            There are currently no Categories available.
+        </li>        
+    </ul>
 {% endfor %}
 {% endblock %}

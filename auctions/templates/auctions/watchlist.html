@@ -2,6 +2,8 @@
 
 {% block body %}
 
+<h1>Watchlist</h1>
+
     <ul>
         {% for item in users_watchlist %}
             <li>
@@ -11,7 +13,9 @@
                 <div>Current Price: {{ item.listing.current_price }}</div>
             </li>
         {% empty %}
-            <li>There are no Auction Listings on your Watchlist</li>
+            <li>
+                There are currently no listings in your Watchlist available.
+            </li>        
         {% endfor %}
     </ul>
 
